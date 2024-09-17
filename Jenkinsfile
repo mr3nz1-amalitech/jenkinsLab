@@ -1,5 +1,5 @@
 pipeline {
-    agen any
+    agent any
     stages {
         stage ("checkout") {
             steps {
@@ -15,22 +15,23 @@ pipeline {
 
         stage ("build") {
             steps {
-                sh "mvn clean install -DSkipTests"
+                sh "mvn clean install -DskipTests"
             }
         }
 
-
         stage ("deploy") {
-
+            steps {
+                echo "Deploying ..."
+            }
         }
     }
 
     post {
-            success {
-                echo 'Build and Deploy succeeded!'
-            }
-            failure {
-                echo 'Build or Deploy failed!'
-            }
+        success {
+            echo 'Build and Deploy succeeded!'
         }
+        failure {
+            echo 'Build or Deploy failed!'
+        }
+    }
 }
