@@ -3,6 +3,9 @@ pipeline {
     stages {
         stage ("test") {
             steps {
+                echo "Branch name ###################"
+                echo BRANCH_NAME
+                echo "Branch name ###################"
                 sh "mvn test"
             }
         }
