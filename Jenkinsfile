@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ("checkout") {
             steps {
-                git "https://github.com/mr3nz1-amalitech/jenkinsLab.git"
+                git url: "https://github.com/mr3nz1-amalitech/jenkinsLab.git", credentialsId: "dc2ae824-a4cd-4290-8396-5bb25d412414", branch: "develop"
             }
         }
 
