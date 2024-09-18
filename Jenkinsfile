@@ -45,7 +45,6 @@ pipeline {
         stage("push image to docker hub") {
             steps {
                 echo "Pushing to docker hub ###############"
-                Use Jenkins credentials instead of hardcoding passwords
                 withCredentials([string(credentialsId: 'a17d306d-d368-4501-9fbf-5d1029458990', usernameVariable: USER_NAME, passwordVariable: PASSWORD)]) {
                     bat "docker logout"
                     bat "docker login -u ${USER_NAME} -p ${PASSWORD}"
