@@ -21,15 +21,15 @@ pipeline {
 //                 echo "Branch name ###################"
 //                 echo BRANCH_NAME
 //                 echo "Branch name ###################"
-//                 sh "mvn test"
+//                 bat "mvn test"
 //             }
 //         }
 
         stage ("build") {
             steps {
                 echo "Using maven #######################"
-                sh "java -version"
-                sh "mvn clean install -DskipTests"
+                bat "java -version"
+                bat "mvn clean install -DskipTests"
                 echo "Using maven #######################"
             }
         }
