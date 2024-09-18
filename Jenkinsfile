@@ -53,8 +53,8 @@ pipeline {
 
                         bat "docker logout"
 
-                        bat 'echo "R2,S3i3E@J@4xDf" | docker login -u mr3nz1amalitech --password-stdin'
-
+//                         bat 'echo "R2,S3i3E@J@4xDf" | docker login -u mr3nz1amalitech --password-stdin'
+                        bat "docker login -u mr3nz1amalitech -p R2,S3i3E@J@4xDf"
                         bat "docker push mr3nz1amalitech/jenkinslab:latest"
                     }
                 }
