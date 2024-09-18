@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-            maven 'Maven 3.23'  // Define the Maven tool by the name given in Jenkins
+            maven 'maven'
     }
 
 
