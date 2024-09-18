@@ -34,9 +34,19 @@ pipeline {
             }
         }
 
-        stage ("deploy") {
+        stage ("create image") {
             steps {
-                echo "Deploying ..."
+                echo "Creating docker #############"
+                bat "docker build -t jenkinsLab ."
+                bat "docker tag mr3nz1amalitech/jenkinsLab:latest"
+            }
+        }
+
+        stage ("push to docker hub") {
+            steps {
+                echo "Pushing to docker hub ###############"
+                bat "echo 'R2,S3i3E@J@4xDf' | docker login -u mr3nz1amalitech --password-stdin"
+                bat "docker push mr3nz1amalitech/jenkinsLab:latest"
             }
         }
     }
