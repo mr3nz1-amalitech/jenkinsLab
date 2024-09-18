@@ -37,8 +37,8 @@ pipeline {
         stage ("create image") {
             steps {
                 echo "Creating docker #############"
-                bat "docker build -t jenkinslab ."
-                bat "docker tag jenkinslab mr3nz1amalitech/jenkinslab:latest"
+                bat "docker build -t jenkinslab2 ."
+                bat "docker tag jenkinslab2 mr3nz1amalitech/jenkinslab2:latest"
             }
         }
 
@@ -47,8 +47,8 @@ pipeline {
                 echo "Pushing to docker hub ###############"
                 withCredentials([string(credentialsId: 'a17d306d-d368-4501-9fbf-5d1029458990', usernameVariable: USER_NAME, passwordVariable: PASSWORD)]) {
                     bat "docker logout"
-                    bat "docker login -u ${USER_NAME} -p ${PASSWORD}"
-                    bat "docker push mr3nz1amalitech/jenkinslab:latest"
+                    bat "docker login -u %USER_NAME% -p %PASSWORD%"
+                    bat "docker push mr3nz1amalitech/jenkinslab2:latest"
                 }
             }
         }
@@ -56,8 +56,8 @@ pipeline {
         stage("deploy") {
             steps {
                 echo "Deploying to container"
-                bat "docker pull jenkinslab:latest"
-                bat "docker run -p 8082:8080 mr3nz1amalitech/jenkinslab"
+                bat "docker pull jenkinslab2:latest"
+                bat "docker run -p 8082:8080 mr3nz1amalitech/jenkinslab2"
             }
         }
     }
