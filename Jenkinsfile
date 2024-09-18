@@ -2,20 +2,10 @@ pipeline {
     agent any
 
     tools {
-            maven 'maven'
+        maven 'maven'
     }
 
-
     stages {
-//         stage("Checkout") {
-//                 steps {
-//                     git branch: "${env.BRANCH_NAME}",
-//                         credentialsId: 'c68e1e84-57b3-4aaa-98e1-da4ea910fc10',
-//                         url: 'git@github.com:mr3nz1-amalitech/jenkinsLab.git'
-//                 }
-//         }
-
-
         stage ("test") {
             steps {
                 echo "Branch name ###################"
@@ -45,9 +35,7 @@ pipeline {
         stage("push image to docker hub") {
             steps {
                 echo "Pushing to Docker Hub ###############"
-                withCredentials([
-                    usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')
-                ]) {
+                withCredentials([usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')]) {
                     bat "docker logout"
                     bat "docker login -u %USER_NAME% -p %PASSWORD%"
                     bat "docker push mr3nz1amalitech/jenkinslab2:latest"
@@ -57,13 +45,11 @@ pipeline {
 
         stage("deploy") {
             steps {
-                withCredentials([
-                    usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')
-                ]) {
+                withCredentials([usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')]) {
                     echo "Deploying to container"
                     bat "docker logout"
-                    bat "docker login -u %USER_NAME% -p %PASSWORD%"}
-                    bat "docker pull jenkinslab2:latest"
+                    bat "docker login -u %USER_NAME% -p %PASSWORD%"
+                    bat "docker pull mr3nz1amalitech/jenkinslab2:latest"
                     bat "docker run -p 8082:8080 mr3nz1amalitech/jenkinslab2"
                 }
             }
