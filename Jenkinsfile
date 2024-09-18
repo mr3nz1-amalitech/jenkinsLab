@@ -5,6 +5,10 @@ pipeline {
             maven 'maven'
     }
 
+    environment {
+        GIT_CREDENTIALS = credentials('mr3nz1-amalitech')
+    }
+
 
     stages {
         stage("Checkout") {
