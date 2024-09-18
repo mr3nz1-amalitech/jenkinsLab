@@ -76,14 +76,10 @@ pipeline {
             cleanWs()
         }
 
-
-
-
-
-
         success {
             echo 'Build and Deploy succeeded!'
         }
+
         failure {
             echo 'Build or Deploy failed!'
         }
