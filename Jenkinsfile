@@ -37,8 +37,8 @@ pipeline {
         stage ("create image") {
             steps {
                 echo "Creating docker #############"
-                bat "docker build -t jenkinsLab ."
-                bat "docker tag mr3nz1amalitech/jenkinsLab:latest"
+                bat "docker build -t jenkinslab ."
+                bat "docker tag mr3nz1amalitech/jenkinslab:latest"
             }
         }
 
