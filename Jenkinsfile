@@ -42,13 +42,17 @@ pipeline {
             }
         }
 
-        stage ("push to docker hub") {
-            steps {
-                echo "Pushing to docker hub ###############"
-                bat "echo 'R2,S3i3E@J@4xDf' | docker login -u mr3nz1amalitech --password-stdin"
-                bat "docker push mr3nz1amalitech/jenkinsLab:latest"
-            }
-        }
+        stage("push to docker hub") {
+                    steps {
+                        echo "Pushing to docker hub ###############"
+                        // Use Jenkins credentials instead of hardcoding passwords
+                        withCredentials([string(credentialsId: 'a17d306d-d368-4501-9fbf-5d1029458990', usernameVariable: USER_NAME, passwordVariable: PASSWORD)]) {
+                            bat "echo '${PASSWORD}' | docker login -u ${USER_NAME} --password-stdin"
+                        }
+                        bat "docker push mr3nz1amalitech/jenkinslab:latest"
+                    }
+                }
+
     }
 
     post {
