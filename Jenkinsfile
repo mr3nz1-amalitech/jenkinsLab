@@ -31,7 +31,9 @@ pipeline {
 
         stage ("build") {
             steps {
+                echo "Using maven #######################"
                 sh "mvn clean install -DskipTests"
+                echo "Using maven #######################"
             }
         }
 
