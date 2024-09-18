@@ -45,7 +45,9 @@ pipeline {
         stage("push image to docker hub") {
             steps {
                 echo "Pushing to Docker Hub ###############"
-                withCredentials([string(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([
+                    usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')
+                ]) {
                     bat "docker logout"
                     bat "docker login -u %USER_NAME% -p %PASSWORD%"
                     bat "docker push mr3nz1amalitech/jenkinslab2:latest"
