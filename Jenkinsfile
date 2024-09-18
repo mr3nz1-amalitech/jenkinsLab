@@ -57,9 +57,15 @@ pipeline {
 
         stage("deploy") {
             steps {
-                echo "Deploying to container"
-                bat "docker pull jenkinslab2:latest"
-                bat "docker run -p 8082:8080 mr3nz1amalitech/jenkinslab2"
+                withCredentials([
+                    usernamePassword(credentialsId: '211a7a70-baf2-4b42-aeb6-05cbd54b8ba5', usernameVariable: 'USER_NAME', passwordVariable: 'PASSWORD')
+                ]) {
+                    echo "Deploying to container"
+                    bat "docker logout"
+                    bat "docker login -u %USER_NAME% -p %PASSWORD%"}
+                    bat "docker pull jenkinslab2:latest"
+                    bat "docker run -p 8082:8080 mr3nz1amalitech/jenkinslab2"
+                }
             }
         }
     }
